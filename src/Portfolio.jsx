@@ -143,8 +143,8 @@ const Portfolio = () => {
   const academicScores = [
     {
       title: "12th Grade",
-      value: "99.16%",
-      label: "Predicted Score"
+      value: "98.2%",
+      label: "Final Score"
     },
     {
       title: "11th Grade",
@@ -261,8 +261,8 @@ const Portfolio = () => {
           <h2>{personalInfo.school}</h2>
         </div>
         <a 
-          href="/Ronith-Kartikeyan-CV.pdf" 
-          download="Ronith_Kartikeyan_CV.pdf"
+          href="/RonithCV.pdf" 
+          download="RonithCV.pdf"
           className="download-cv-btn"
         >
           <Download size={18} />

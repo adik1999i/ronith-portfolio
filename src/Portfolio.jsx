@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Film, Trophy, GraduationCap, Video, X, Globe, Code, Github,Download } from 'lucide-react';
+import { Film, Trophy, GraduationCap, Video, X, Globe, Code, Github, Download } from 'lucide-react';
 import './styles/Portfolio.css';
 
 const Portfolio = () => {
@@ -87,7 +87,7 @@ const Portfolio = () => {
         "Circuit wiring",
         "Breadboard prototyping"
       ],
-      thumbnail: "/images/led-matrix.jpeg", // Save the uploaded image with this name
+      thumbnail: "/images/led-matrix.jpeg",
       year: "2025",
       github: "https://github.com/ronith-engineer/LED-Matrix-Arduino-Project.git"
     },
@@ -102,6 +102,26 @@ const Portfolio = () => {
   ];
 
   const achievements = [
+    {
+      title: "Official Character Certificate",
+      event: "Springdales School, Pusa Road - Class 12 Graduation",
+      keyPoints: [
+        "98.2% in Class XII",
+        "96% in Class X CBSE",
+        "School Prefect",
+        "Multiple Memorial Awards"
+      ],
+      description: "Official character certificate recognizing academic excellence, leadership qualities, and exemplary conduct throughout 14 years at Springdales School",
+      image: "/images/character_certificate.jpg",
+      downloadLink: "/character_certificate.pdf",
+      isDocument: true,
+      // additionalInfo: [
+      //   "Vidya Bhushan Khurana Memorial Award",
+      //   "Sidhant Shukla Memorial Award", 
+      //   "Mrs Lalita Khare Memorial Trophy",
+      //   "Special Springdalian Values Award"
+      // ]
+    },
     {
       title: "Academic Excellence",
       event: "66th Annual Award Ceremony",
@@ -246,37 +266,37 @@ const Portfolio = () => {
     <div className="portfolio">
       {/* Header */}
       <header className="header">
-  <div className="header-content">
-    <div className="profile-image-wrapper">
-      <img 
-        src="/images/ronith-profile.jpg" 
-        alt={personalInfo.name}
-        className="profile-image"
-      />
-    </div>
-    <div className="header-text">
-      <div className="header-top">
-        <div>
-          <h1>{personalInfo.name}</h1>
-          <h2>{personalInfo.school}</h2>
+        <div className="header-content">
+          <div className="profile-image-wrapper">
+            <img 
+              src="/images/ronith-profile.jpg" 
+              alt={personalInfo.name}
+              className="profile-image"
+            />
+          </div>
+          <div className="header-text">
+            <div className="header-top">
+              <div>
+                <h1>{personalInfo.name}</h1>
+                <h2>{personalInfo.school}</h2>
+              </div>
+              <a 
+                href="/RonithCV.pdf" 
+                download="RonithCV.pdf"
+                className="download-cv-btn"
+              >
+                <Download size={18} />
+                Download CV
+              </a>
+            </div>
+            <div className="bio-tags">
+              {personalInfo.bio.map((point, index) => (
+                <span key={index} className="bio-tag">{point}</span>
+              ))}
+            </div>
+          </div>
         </div>
-        <a 
-          href="/RonithCV.pdf" 
-          download="RonithCV.pdf"
-          className="download-cv-btn"
-        >
-          <Download size={18} />
-          Download CV
-        </a>
-      </div>
-      <div className="bio-tags">
-        {personalInfo.bio.map((point, index) => (
-          <span key={index} className="bio-tag">{point}</span>
-        ))}
-      </div>
-    </div>
-  </div>
-</header>
+      </header>
 
       {/* Academic Excellence */}
       <section className="section">
@@ -337,12 +357,25 @@ const Portfolio = () => {
         </div>
         <div className="gallery-grid">
           {achievements.map((achievement, index) => (
-            <div key={index} className="gallery-card">
-              <img 
-                src={achievement.image} 
-                alt={achievement.title}
-                className="gallery-image"
-              />
+            <div key={index} className={`gallery-card ${achievement.isDocument ? 'document-card' : ''}`}>
+              <div className="gallery-image-wrapper">
+                <img 
+                  src={achievement.image} 
+                  alt={achievement.title}
+                  className="gallery-image"
+                />
+                {achievement.downloadLink && (
+                  <a 
+                    href={achievement.downloadLink}
+                    download="Character-Certificate.pdf"
+                    className="document-download-btn"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <Download size={16} />
+                    Download PDF
+                  </a>
+                )}
+              </div>
               <div className="gallery-content">
                 <h3>{achievement.title}</h3>
                 <p className="event">{achievement.event}</p>
@@ -352,6 +385,16 @@ const Portfolio = () => {
                     <span key={i} className="key-tag">{point}</span>
                   ))}
                 </div>
+                {achievement.additionalInfo && (
+                  <div className="additional-awards">
+                    <h4>Special Awards & Recognition:</h4>
+                    <ul>
+                      {achievement.additionalInfo.map((award, i) => (
+                        <li key={i}>{award}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           ))}

@@ -7,8 +7,7 @@ const Portfolio = () => {
 
   const personalInfo = {
     name: "Ronith Kartikeyan",
-    school: "Springdales School, Pusa Road",
-    grade: "12th Grade",
+    school: "National University Of Singapore",
     bio: [
       "🎓 Aspiring Electrical Engineer with deep passion for Physics and Mathematics",
       "🎥 National award-winning filmmaker",
@@ -29,8 +28,8 @@ const Portfolio = () => {
       ],
       description: "A film highlighting the journey of overcoming learning challenges through determination and support",
       thumbnail: "/images/tgel-2022.jpeg",
-      videoLink: "https://drive.google.com/file/d/1a_vI_E_L-k7baw-zRDXlGCDcrN68zsSR/view",
-      type: "drive"
+      videoLink: "https://www.youtube.com/watch?v=WTC1w64dBjY",
+      type: "youtube"
     },
     {
       title: "Virtual Tour of Kumbalgarh Fort",
@@ -59,7 +58,19 @@ const Portfolio = () => {
       thumbnail: "/images/manthan.png",
       videoLink: "https://www.youtube.com/watch?v=7LoRyZpe1yg",
       type: "youtube"
-    }
+    },
+    {
+  title: "EUSOFF HALL BANNER REVELATION", // Replace with actual title
+  award: "CONTENT PRODUCED", // Replace with actual award or remove this line
+  keyPoints: [
+    "Video Shooting",
+    "Video Editing",
+  ],
+  description: "Covers Eusoff hall's IHG Banner Reveal",
+  thumbnail: "/images/ronith-insta.png", // Add thumbnail image
+  videoLink: "https://www.instagram.com/reel/DQ3d2UKEmx_/",
+  type: "instagram"
+}
   ];
 
   const academicProjects = [
@@ -106,7 +117,7 @@ const Portfolio = () => {
       title: "Official Character Certificate",
       event: "Springdales School, Pusa Road - Class 12 Graduation",
       keyPoints: [
-        "98.2% in Class XII",
+        "97% in Class XII",
         "96% in Class X CBSE",
         "School Prefect",
         "Multiple Memorial Awards"
@@ -161,9 +172,14 @@ const Portfolio = () => {
   ];
 
   const academicScores = [
+     {
+  title: "NUS Bachelor's of Electrical Engineering",
+  value: "4.7 GPA",
+  label: "Sem 1"
+},
     {
       title: "12th Grade",
-      value: "98.2%",
+      value: "97%",
       label: "Final Score"
     },
     {
@@ -255,12 +271,24 @@ const Portfolio = () => {
     return url;
   };
 
+  const getInstagramEmbedUrl = (url) => {
+  // Instagram embed URL format
+  return `${url}embed/`;
+};
+
   const openVideo = (video) => {
-    const embedUrl = video.type === 'youtube' 
-      ? getYoutubeEmbedUrl(video.videoLink)
-      : getDriveEmbedUrl(video.videoLink);
-    setSelectedVideo({ ...video, embedUrl });
-  };
+  let embedUrl;
+  
+  if (video.type === 'youtube') {
+    embedUrl = getYoutubeEmbedUrl(video.videoLink);
+  } else if (video.type === 'drive') {
+    embedUrl = getDriveEmbedUrl(video.videoLink);
+  } else if (video.type === 'instagram') {
+    embedUrl = getInstagramEmbedUrl(video.videoLink);
+  }
+  
+  setSelectedVideo({ ...video, embedUrl });
+};
 
   return (
     <div className="portfolio">
@@ -269,7 +297,7 @@ const Portfolio = () => {
         <div className="header-content">
           <div className="profile-image-wrapper">
             <img 
-              src="/images/ronith-profile.jpg" 
+              src="/images/ronith-profile-new.jpeg" 
               alt={personalInfo.name}
               className="profile-image"
             />
@@ -281,8 +309,8 @@ const Portfolio = () => {
                 <h2>{personalInfo.school}</h2>
               </div>
               <a 
-                href="/RonithCV.pdf" 
-                download="RonithCV.pdf"
+                href="/RonithCV1.pdf" 
+                download="RonithCV1.pdf"
                 className="download-cv-btn"
               >
                 <Download size={18} />
@@ -319,7 +347,7 @@ const Portfolio = () => {
       <section className="section">
         <div className="section-title">
           <Film size={24} />
-          <h2>Award-Winning Films</h2>
+          <h2>Videos & Films Produced</h2>
         </div>
         <div className="video-grid">
           {filmProjects.map((project, index) => (
